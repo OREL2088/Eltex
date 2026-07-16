@@ -1,0 +1,275 @@
+root@eltex-practice2-v30:~# git config --global user.name "OREL2088"
+root@eltex-practice2-v30:~# git config --global user.email "slavik2088@gmail.com"
+root@eltex-practice2-v30:~# git config --global init.defaultBranch main
+
+root@eltex-practice2-v30:~# apt update
+Hit:1 http://ru.archive.ubuntu.com/ubuntu noble InRelease
+Hit:2 http://ru.archive.ubuntu.com/ubuntu noble-updates InRelease          
+Hit:3 http://ru.archive.ubuntu.com/ubuntu noble-backports InRelease        
+Hit:4 http://security.ubuntu.com/ubuntu noble-security InRelease           
+Reading package lists... Done                        
+Building dependency tree... Done
+Reading state information... Done
+77 packages can be upgraded. Run 'apt list --upgradable' to see them.
+
+root@eltex-practice2-v30:~# apt install git gh
+
+The following NEW packages will be installed:
+  gh
+0 upgraded, 1 newly installed, 0 to remove and 77 not upgraded.
+Need to get 8836 kB of archives.
+After this operation, 45.4 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://ru.archive.ubuntu.com/ubuntu noble-updates/universe amd64 gh amd64 2.45.0-1ubuntu0.3 [8836 kB]
+Fetched 8836 kB in 1s (10.5 MB/s)
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+        LANGUAGE = (unset),
+        LC_ALL = (unset),
+        LANG = "ru_RU.UTF8"
+    are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_MESSAGES to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+Selecting previously unselected package gh.
+(Reading database ... 125687 files and directories currently installed.)
+Preparing to unpack .../gh_2.45.0-1ubuntu0.3_amd64.deb ...
+Unpacking gh (2.45.0-1ubuntu0.3) ...
+Setting up gh (2.45.0-1ubuntu0.3) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+        LANGUAGE = (unset),
+        LC_ALL = (unset),
+        LANG = "ru_RU.UTF8"
+    are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+Scanning processes...                                                          
+Scanning linux images...                                                       
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+
+root@eltex-practice2-v30:~# ssh-keygen -t ed25519 -f ~/.ssh/eltex-v30
+Generating public/private ed25519 key pair.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /root/.ssh/eltex-v30
+Your public key has been saved in /root/.ssh/eltex-v30.pub
+The key fingerprint is:
+SHA256:3O3+Sk2jRzW/Lg6KL8OAiGXZy7KNl2KDsE50nZeTxew root@eltex-practice2-v30
+The key's randomart image is:
++--[ED25519 256]--+
+|                 |
+|        o        |
+|   o     +     ..|
+|  + o ..=. .   .o|
+|.+.o.+ =SE. . + .|
+|+.o.o.. .  . = ..|
+|.+ = .o    .+ o. |
+|+ * +  +. .o.o.  |
+|.o +   .+o  ++o. |
++----[SHA256]-----+
+
+root@eltex-practice2-v30:~# gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations on this host? SSH         ? Upload your SSH public key to your GitHub account? /root/.ssh/eltex-v30.pub  ? Title for your SSH key: eltex-practice2-pgX-vY
+? How would you like to authenticate GitHub CLI? Login with a web browser       
+! First copy your one-time code: 8F0B-4F7C
+Press Enter to open github.com in your browser...
+! Failed opening a web browser at https://github.com/login/device
+  exec: "xdg-open,x-www-browser,www-browser,wslview": executable file not found in $PATH
+  Please try entering the URL in your browser manually
+✓ Authentication complete.
+- gh config set -h github.com git_protocol ssh
+✓ Configured git protocol
+! Authentication credentials saved in plain text
+✓ Uploaded the SSH key to your GitHub account: /root/.ssh/eltex-v30.pub
+✓ Logged in as OREL2088
+
+root@eltex-practice2-v30:~# gh auth setup-git --hostname github.com
+
+root@eltex-practice2-v30:~# gh auth status
+github.com
+  ✓ Logged in to github.com account OREL2088 (/root/.config/gh/hosts.yml)
+  - Active account: true
+  - Git operations protocol: ssh
+  - Token: gho_************************************
+  - Token scopes: 'admin:public_key', 'gist', 'read:org', 'repo'
+
+
+t@eltex-practice2-v30:~# gh repo create --public Eltex
+✓ Created repository OREL2088/Eltex on GitHub
+  https://github.com/OREL2088/Eltex
+
+root@eltex-practice2-v30:~# mkdir ~/Module1 && cd ~/Module1
+root@eltex-practice2-v30:~/Module1# cd
+root@eltex-practice2-v30:~# mkdir Eltex && cd Eltex
+root@eltex-practice2-v30:~/Eltex# echo "Eltex repository for practical assignments" >> README.md
+
+root@eltex-practice2-v30:~/Eltex# git init
+Initialized empty Git repository in /root/Eltex/.git/
+root@eltex-practice2-v30:~/Eltex# git add README.md 
+root@eltex-practice2-v30:~/Eltex# git commit -m "first commit"
+[main (root-commit) d035037] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+
+
+root@eltex-practice2-v30:~/Eltex# git remote add origin https://github.com/OREL
+2088/Eltex.git
+root@eltex-practice2-v30:~/Eltex# git status
+On branch main
+nothing to commit, working tree clean
+
+root@eltex-practice2-v30:~/Eltex# git push -u origin main
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 259 bytes | 259.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/OREL2088/Eltex.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+
+root@eltex-practice2-v30:~/Eltex# mkdir -p module1/task1
+root@eltex-practice2-v30:~/Eltex# mkdir module1/task2
+root@eltex-practice2-v30:~/Eltex# mkdir module1/task3
+
+eltex-v30@eltex-2026-summer-12:51~$ scp report_part1.txt root@172.16.9.204:~/Eltex/module1/task1
+report_part1.txt                             100%  128     6.9KB/s   00:00
+
+eltex-v30@eltex-2026-summer-12:51~$ scp eltex-v30_part.log root@172.16.9.204:~/
+Eltex/module1/task2
+eltex-v30_part.log                           100% 6786   431.8KB/s   00:00    
+eltex-v30@eltex-2026-summer-12:51~$ scp eltex-v30_part3.log root@172.16.9.204:~
+/Eltex/module1/task3
+eltex-v30_part3.log                          100%  598    41.8KB/s   00:00    
+eltex-v30@eltex-2026-summer-12:51~$ scp eltex-v30_part3_gt20M.log root@172.16.9
+.204:~/Eltex/module1/task3
+eltex-v30_part3_gt20M.log                    100% 2880   203.1KB/s   00:00
+
+
+root@eltex-practice2-v30:~/Eltex# git add .
+root@eltex-practice2-v30:~/Eltex# git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   module1/task1/eltex-v30_part.log
+        new file:   module1/task1/eltex-v30_part3.log
+        new file:   module1/task1/eltex-v30_part3_gt20M.log
+        new file:   module1/task1/report_part1.txt
+
+root@eltex-practice2-v30:~/Eltex# git commit -m "first practice"
+[main e0e4266] first practice
+ 4 files changed, 290 insertions(+)
+ create mode 100644 module1/task1/eltex-v30_part.log
+ create mode 100644 module1/task1/eltex-v30_part3.log
+ create mode 100644 module1/task1/eltex-v30_part3_gt20M.log
+ create mode 100644 module1/task1/report_part1.txt
+
+
+root@eltex-practice2-v30:~/Eltex# git push
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (8/8), 3.17 KiB | 3.17 MiB/s, done.
+Total 8 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/OREL2088/Eltex.git
+   d035037..e0e4266  main -> main
+
+root@eltex-practice2-v30:~/Eltex_clone# git clone https://github.com/OREL2088/Eltex.git
+Cloning into 'Eltex'...
+remote: Enumerating objects: 11, done.
+remote: Counting objects: 100% (11/11), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 11 (delta 0), reused 11 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (11/11), done.
+
+eltex-v30@eltex-2026-summer-12:51~$ scp practice2_eltex-v30_part1.log root@172.
+16.9.204:~/Eltex/module1/task2
+practice2_eltex-v30_part1.log                100%   10KB  14.5MB/s   00:00    
+eltex-v30@eltex-2026-summer-12:51~$ scp practice2_eltex-v30_part2.log root@172.
+16.9.204:~/Eltex/module1/task2
+practice2_eltex-v30_part2.log                100% 6215    14.6MB/s   00:00
+
+root@eltex-practice2-v30:~/Eltex# git add .
+root@eltex-practice2-v30:~/Eltex# git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   module1/task2/practice2_eltex-v30_part1.log
+        new file:   module1/task2/practice2_eltex-v30_part2.log
+
+root@eltex-practice2-v30:~/Eltex# git commit -m "Add practice2 part1 and part2"[main 1ebfff3] Add practice2 part1 and part2
+ 2 files changed, 394 insertions(+)
+ create mode 100644 module1/task2/practice2_eltex-v30_part1.log
+ create mode 100644 module1/task2/practice2_eltex-v30_part2.log
+
+root@eltex-practice2-v30:~/Eltex# git push origin main
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 5.51 KiB | 5.51 MiB/s, done.
+Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/OREL2088/Eltex.git
+   e0e4266..1ebfff3  main -> main
+
+root@eltex-practice2-v30:~/Eltex_clone/Eltex# git fetch 
+remote: Enumerating objects: 8, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 6 (delta 0), reused 6 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (6/6), 5.49 KiB | 5.49 MiB/s, done.
+From https://github.com/OREL2088/Eltex
+   e0e4266..1ebfff3  main       -> origin/main
+root@eltex-practice2-v30:~/Eltex_clone/Eltex# git log origin/main
+commit 1ebfff330864903ee59aef493043a9ca51518d96 (origin/main, origin/HEAD)
+Author: OREL2088 <slavik2088@gmail.com>
+Date:   Thu Jul 16 10:15:44 2026 +0000
+
+    Add practice2 part1 and part2
+
+commit e0e42664b2c6296635637004039428d12f96efc7 (HEAD -> main)
+Author: OREL2088 <slavik2088@gmail.com>
+Date:   Thu Jul 16 10:01:14 2026 +0000
+
+    first practice
+
+commit d03503745c49844557eefa01ffff153d83db13ea
+Author: OREL2088 <slavik2088@gmail.com>
+Date:   Thu Jul 16 09:37:49 2026 +0000
+
+    first commit
+
+
+root@eltex-practice2-v30:~/Eltex_clone/Eltex# git diff main origin/main
+diff --git a/module1/task2/practice2_eltex-v30_part1.log b/module1/task2/practice2_eltex-v30_part1.log
+new file mode 100644
+index 0000000..42fd5a4
+--- /dev/null
++++ b/module1/task2/practice2_eltex-v30_part1.log
+@@ -0,0 +1,265 @@
+
+root@eltex-practice2-v30:~/Eltex_clone/Eltex# git merge
+Updating e0e4266..1ebfff3
+Fast-forward
+ module1/task2/practice2_eltex-v30_part1.log | 265 +++++++++++++++++++++++++++
+ module1/task2/practice2_eltex-v30_part2.log | 129 +++++++++++++
+ 2 files changed, 394 insertions(+)
+ create mode 100644 module1/task2/practice2_eltex-v30_part1.log
+ create mode 100644 module1/task2/practice2_eltex-v30_part2.log
