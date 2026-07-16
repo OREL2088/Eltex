@@ -1,0 +1,243 @@
+eltex-v30@eltex-2026-summer:~$ ls
+ls           lsb_release  lsinitramfs  lslocks      lsmod        lspci
+lsattr       lscpu        lsipc        lslogins     lsns         lsusb
+lsblk        lsfd         lsirq        lsmem        lsof         
+
+eltex-v30@eltex-2026-summer:~$ $HIST
+$HISTCMD       $HISTCONTROL   $HISTFILE      $HISTFILESIZE  $HISTSIZE
+
+eltex-v30@eltex-2026-summer:~$ echo $HISTFILESIZE
+2000
+
+eltex-v30@eltex-2026-summer:~$ ls ~/.*
+/home/eltex-v30/.bash_history
+/home/eltex-v30/.bash_logout
+/home/eltex-v30/.bashrc
+/home/eltex-v30/.lesshst
+/home/eltex-v30/.log
+/home/eltex-v30/.profile
+/home/eltex-v30/.viminfo
+
+/home/eltex-v30/.config:
+procps
+
+eltex-v30@eltex-2026-summer:~$ export HISTTIMEFORMAT='%d.%m.%Y %H:%M:%S '
+
+eltex-v30@eltex-2026-summer:~$ history 20 >> eltex-v30.log
+  212  07.07.2026 22:39:05 script >> eltex-v30_part.log
+  213  07.07.2026 22:39:50 vi eltex-v30_part.log 
+  214  07.07.2026 22:40:26 script >> eltex-v30_part.log
+  215  07.07.2026 22:40:52 vi eltex-v30_part.log 
+  216  07.07.2026 22:44:19 echo $HISTFILESIZE
+  217  07.07.2026 22:45:34 ls ~/.*
+  218  07.07.2026 22:45:55 ls ~/.* >> eltex-v30_part.log 
+  219  07.07.2026 22:46:08 vi eltex-v30_part.log
+  220  07.07.2026 22:49:02 history
+  221  07.07.2026 22:49:53 script >> eltex-v30_part.log
+  222  07.07.2026 22:50:18 vi eltex-v30_part.log
+  223  07.07.2026 22:50:33 script >> eltex-v30_part.log
+  224  07.07.2026 22:51:26 vi eltex-v30_part.log
+  225  07.07.2026 22:52:13 script >> eltex-v30_part.log
+  226  07.07.2026 22:53:14 vi eltex-v30_part.log
+  227  07.07.2026 22:54:39 history >> eltex-v30_part.log 
+  228  07.07.2026 22:54:42 vi eltex-v30_part.log
+  229  07.07.2026 22:59:23 export HISTTIMEFORMAT='%d.%m.%Y %H:%M:%S '
+  230  07.07.2026 22:59:28 history
+  231  07.07.2026 23:00:38 history 20 >> eltex-v30_part.log
+
+eltex-v30@eltex-2026-summer:~$ date
+Wed Jul  8 07:39:51 PM +07 2026
+eltex-v30@eltex-2026-summer:~$ history 2
+  239  08.07.2026 19:39:51 date
+  240  08.07.2026 19:40:27 history 2
+eltex-v30@eltex-2026-summer:~$ tail -n 5 ~/.bash_history
+vi practice2_eltex-v30_part1.log 
+screen -r serv2 
+vi practice2_eltex-v30_part1.log 
+screen -r serv2
+screen -ls
+
+eltex-v30@eltex-2026-summer:~$ PROMPT_COMMAND='history -a'
+eltex-v30@eltex-2026-summer:~$ export PROMPT_COMMAND
+eltex-v30@eltex-2026-summer:~$ pwd
+/home/eltex-v30
+eltex-v30@eltex-2026-summer:~$ history 5
+  249  08.07.2026 20:07:12 $PROMPT_COMMAND='history -a'
+  250  08.07.2026 20:08:16 PROMPT_COMMAND='history -a'
+  251  08.07.2026 20:08:55 export PROMPT_COMMAND
+  252  08.07.2026 20:09:05 pwd
+  253  08.07.2026 20:09:41 history 5
+eltex-v30@eltex-2026-summer:~$ tail -n 5 ~/.bash_history
+export PROMPT_COMMAND
+#1783516145
+pwd
+#1783516181
+history 5
+
+eltex-v30@eltex-2026-summer:~$ DATE=$(date +"%d.%m.%Y")
+eltex-v30@eltex-2026-summer:~$ echo $DATE
+08.07.2026
+
+eltex-v30@eltex-2026-summer:~$ TIME=$(date +"%H:%M:%S")
+eltex-v30@eltex-2026-summer:~$ echo $TIME
+20:29:14
+
+eltex-v30@eltex-2026-summer:~$ DATE_TIME="$DATE $TIME"
+eltex-v30@eltex-2026-summer:~$ echo $DATE_TIME
+08.07.2026 20:29:14
+
+eltex-v30@eltex-2026-summer:~$ ls /bin/*[0-9]* /sbin/*[0-9]* >> eltex-v30_part.log
+
+/bin/addr2line
+/bin/b2sum
+/bin/base32
+/bin/base64
+/bin/bunzip2
+/bin/bzip2
+/bin/bzip2recover
+/bin/c89
+/bin/c89-gcc
+/bin/c99
+/bin/c99-gcc
+/bin/cpan5.36-x86_64-linux-gnu
+/bin/cpp-12
+/bin/diff3
+/bin/enc2xs
+/bin/gcc-12
+/bin/gcc-ar-12
+/bin/gcc-nm-12
+/bin/gcc-ranlib-12
+/bin/gcov-12
+/bin/gcov-dump-12
+/bin/gcov-tool-12
+/bin/grub-menulst2cfg
+/bin/grub-mkpasswd-pbkdf2
+/bin/grub-syslinux2cfg
+/bin/h2ph
+/bin/h2xs
+/bin/i386
+/bin/linux32
+/bin/linux64
+/bin/lto-dump-12
+/bin/md5sum
+/bin/md5sum.textutils
+/bin/pdb3
+/bin/pdb3.11
+/bin/perl5.36.0
+/bin/perl5.36-x86_64-linux-gnu
+/bin/ping4
+/bin/ping6
+/bin/pl2pm
+/bin/pod2html
+/bin/pod2man
+/bin/pod2text
+/bin/pod2usage
+/bin/py3clean
+/bin/py3compile
+/bin/py3versions
+/bin/pydoc3
+/bin/pydoc3.11
+/bin/pygettext3
+/bin/pygettext3.11
+/bin/python3
+/bin/python3.11
+/bin/sha1sum
+/bin/sha224sum
+/bin/sha256sum
+/bin/sha384sum
+/bin/sha512sum
+/bin/ssh-argv0
+/bin/systemd-id128
+/bin/traceroute6
+/bin/traceroute6.db
+/bin/x86_64
+/bin/x86_64-linux-gnu-addr2line
+/bin/x86_64-linux-gnu-ar
+/bin/x86_64-linux-gnu-as
+/bin/x86_64-linux-gnu-c++filt
+/bin/x86_64-linux-gnu-cpp
+/bin/x86_64-linux-gnu-cpp-12
+/bin/x86_64-linux-gnu-dwp
+/bin/x86_64-linux-gnu-elfedit
+/bin/x86_64-linux-gnu-gcc
+/bin/x86_64-linux-gnu-gcc-12
+/bin/x86_64-linux-gnu-gcc-ar
+/bin/x86_64-linux-gnu-gcc-ar-12
+/bin/x86_64-linux-gnu-gcc-nm
+/bin/x86_64-linux-gnu-gcc-nm-12
+/bin/x86_64-linux-gnu-gcc-ranlib
+/bin/x86_64-linux-gnu-gcc-ranlib-12
+/bin/x86_64-linux-gnu-gcov
+/bin/x86_64-linux-gnu-gcov-12
+/bin/x86_64-linux-gnu-gcov-dump
+/bin/x86_64-linux-gnu-gcov-dump-12
+/bin/x86_64-linux-gnu-gcov-tool
+/bin/x86_64-linux-gnu-gcov-tool-12
+/bin/x86_64-linux-gnu-gold
+/bin/x86_64-linux-gnu-gp-archive
+/bin/x86_64-linux-gnu-gp-collect-app
+/bin/x86_64-linux-gnu-gp-display-html
+/bin/x86_64-linux-gnu-gp-display-src
+/bin/x86_64-linux-gnu-gp-display-text
+/bin/x86_64-linux-gnu-gprof
+/bin/x86_64-linux-gnu-gprofng
+/bin/x86_64-linux-gnu-ld
+/bin/x86_64-linux-gnu-ld.bfd
+/bin/x86_64-linux-gnu-ld.gold
+/bin/x86_64-linux-gnu-lto-dump
+/bin/x86_64-linux-gnu-lto-dump-12
+/bin/x86_64-linux-gnu-nm
+/bin/x86_64-linux-gnu-objcopy
+/bin/x86_64-linux-gnu-objdump
+/bin/x86_64-linux-gnu-ranlib
+/bin/x86_64-linux-gnu-readelf
+/bin/x86_64-linux-gnu-size
+/bin/x86_64-linux-gnu-strings
+/bin/x86_64-linux-gnu-strip
+/sbin/dumpe2fs
+/sbin/e2freefrag
+/sbin/e2fsck
+/sbin/e2image
+/sbin/e2label
+/sbin/e2mmpstatus
+/sbin/e2scrub
+/sbin/e2scrub_all
+/sbin/e2undo
+/sbin/e4crypt
+/sbin/e4defrag
+/sbin/fsck.ext2
+/sbin/fsck.ext3
+/sbin/fsck.ext4
+/sbin/killall5
+/sbin/mke2fs
+/sbin/mkfs.ext2
+/sbin/mkfs.ext3
+/sbin/mkfs.ext4
+/sbin/resize2fs
+/sbin/tune2fs
+/sbin/update-grub2
+
+eltex-v30@eltex-2026-summer:~$ PS1=\u@\h-$(date +"%H:%M")
+u@h-20:47PS1="\u@\h-$(date +"%H:%M")"
+eltex-v30@eltex-2026-summer-20:47PS1="\u@\h-$(date +"%H:%M")\w\$ "
+eltex-v30@eltex-2026-summer-20:48~$
+
+eltex-v30@eltex-2026-summer:~$ PS1="\u@\h-$(date +"%H:%M")\w\$ "
+eltex-v30@eltex-2026-summer-20:58~$ export PS1
+eltex-v30@eltex-2026-summer-20:58~$ bash
+eltex-v30@eltex-2026-summer:~$ exit
+eltex-v30@eltex-2026-summer-20:58~$ echo 'export PS1="\u@\h-$(date +"%H:%M")\w\$ "' >> ~/.bashrc
+eltex-v30@eltex-2026-summer-20:58~$ bash
+eltex-v30@eltex-2026-summer-21:01~$ exit
+exit
+eltex-v30@eltex-2026-summer-20:58~$  
+
+eltex-v30@eltex-2026-summer-23:22~$ mkdir ~/$(date +"%Y")-{01..12}
+eltex-v30@eltex-2026-summer-23:22~$ ls
+2026-01  2026-06  2026-11                        report_part2.txt  yes.pub
+2026-02  2026-07  2026-12                        report_part.txt
+2026-03  2026-08  eltex-v30_part.log             test.log
+2026-04  2026-09  practice2_eltex-v30_part1.log  typescript
+2026-05  2026-10  report_part1.txt               yes
+which find
+file /usr/bin/find
