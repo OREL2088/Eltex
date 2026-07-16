@@ -1,0 +1,265 @@
+eltex-v30@eltex-2026-summer:~$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/eltex-v30/.ssh/id_rsa): yes
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in yes
+Your public key has been saved in yes.pub
+The key fingerprint is:
+SHA256:lHQk8XGE7QHxhD0kqh/O9Df9bmj7J8U6/xGxFj9F4z4 eltex-v30@eltex-2026-summer
+The key's randomart image is:
++---[RSA 3072]----+
+|        +oBX=  ..|
+|       . *o*= ...|
+|        + ...o +.|
+|       o    . . *|
+|      . S      E.|
+|       = o   .. *|
+|        + . o .= |
+|           . .*.+|
+|             ..OO|
++----[SHA256]-----+
+
+eltex-v30@eltex-2026-summer:~$ ssh-copy-id root@172.16.9.204
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/eltex-v30/.ssh/id_rsa.pub"
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@172.16.9.204's password: 
+Permission denied, please try again.
+root@172.16.9.204's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'root@172.16.9.204'"
+and check to make sure that only the key(s) you wanted were added.
+
+eltex-v30@eltex-2026-summer:~$ ssh root@172.16.9.204
+Welcome to Ubuntu 24.04.2 LTS (GNU/Linux 6.8.0-55-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Jul  8 05:29:27 AM UTC 2026
+
+  System load:  0.06               Processes:              112
+  Usage of /:   44.1% of 14.66GB   Users logged in:        1
+  Memory usage: 6%                 IPv4 address for ens18: 172.16.9.204
+[M`'7  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+263 updates can be applied immediately.
+198 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Wed Jul  8 04:30:00 2026 from 172.16.8.4
+root@eltex-practice2-v30:~# eltex-v30@eltex-2026-summer:~$ ssh root@172.16.9.204
+Welcome to Ubuntu 24.04.2 LTS (GNU/Linux 6.8.0-55-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Jul  8 05:29:27 AM UTC 2026
+
+  System load:  0.06               Processes:              112
+  Usage of /:   44.1% of 14.66GB   Users logged in:        1
+  Memory usage: 6%                 IPv4 address for ens18: 172.16.9.204
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+263 updates can be applied immediately.
+198 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Wed Jul  8 04:30:00 2026 from 172.16.8.4
+root@eltex-practice2-v30:~# 
+
+
+eltex-v30@eltex-2026-summer:~$ cat ~/.ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDQAm4lbOOCp3QMa6Ozg1r/VPSr543mgJIrEHOLCsmvhhRokjCX0FdhbPmJZ80OvqnLHgo8l+PmWKYlAHOreGjA7tyavRieMA/MN6MafO6byP+4u/Hb4KKCKbP2n38lBpQACqD3zEvYi/qjfoJXuseKZiEqm4zAwuBt+8e1vIUj3qNV418JpSwftpz65hVaeo9MOuMzw83x5urAfzzhLxasASMGtwG5i/6PgkK3iirQhxFt+678MhlFLxqAjhQKPb9Gsj7Yxioz4xqCOdp4NEAaBykCG8MARncY0kpGD1TNKw+kT2TpJvT1saH0nAn6m/KR8DY/C3y8I29Ma9XVZ3JxXxIpfbqozIZViBjEFY+/l+5kJr2RWEsJybDxOT2aa5SZ1X8l3lzhRL7ALCKMY+LmBWnYVtpQwWv86P4aWoTnozxqTfL0CzzFZZOv/AX+tcT+KVN7l9MbWOf7zTUaOTVmHI+c02TAUEE7457y8Aayyh5gCOYzJRQJ9eckSDnYkYc= eltex-v30@eltex-2026-summer
+
+
+root@eltex-practice2-v30:~# cat ~/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDQAm4lbOOCp3QMa6Ozg1r/VPSr543mgJIrEHOLCsmvhhRokjCX0FdhbPmJZ80OvqnLHgo8l+PmWKYlAHOreGjA7tyavRieMA/MN6MafO6byP+4u/Hb4KKCKbP2n38lBpQACqD3zEvYi/qjfoJXuseKZiEqm4zAwuBt+8e1vIUj3qNV418JpSwftpz65hVaeo9MOuMzw83x5urAfzzhLxasASMGtwG5i/6PgkK3iirQhxFt+678MhlFLxqAjhQKPb9Gsj7Yxioz4xqCOdp4NEAaBykCG8MARncY0kpGD1TNKw+kT2TpJvT1saH0nAn6m/KR8DY/C3y8I29Ma9XVZ3JxXxIpfbqozIZViBjEFY+/l+5kJr2RWEsJybDxOT2aa5SZ1X8l3lzhRL7ALCKMY+LmBWnYVtpQwWv86P4aWoTnozxqTfL0CzzFZZOv/AX+tcT+KVN7l9MbWOf7zTUaOTVmHI+c02TAUEE7457y8Aayyh5gCOYzJRQJ9eckSDnYkYc= eltex-v30@eltex-2026-summer
+
+
+root@eltex-practice2-v30:~# useradd -m -s /bin/bash user1
+root@eltex-practice2-v30:~# passwd user1
+New password: 
+Retype new password: 
+passwd: password updated successfully
+
+root@eltex-practice2-v30:~# adduser user2
+info: Adding user `user2' ...
+info: Selecting UID/GID from range 1000 to 59999 ...
+info: Adding new group `user2' (1002) ...
+info: Adding new user `user2' (1002) with group `user2 (1002)' ...
+info: Creating home directory `/home/user2' ...
+info: Copying files from `/etc/skel' ...
+New password: 
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for user2
+Enter the new value, or press ENTER for the default
+        Full Name []: 
+        Room Number []: 
+        Work Phone []: 
+        Home Phone []: 
+        Other []: 
+Is the information correct? [Y/n] y
+info: Adding new user `user2' to supplemental / extra groups `users' ...
+info: Adding user `user2' to group `users' ...
+root@eltex-practice2-v30:~# adduser user3
+info: Adding user `user3' ...
+info: Selecting UID/GID from range 1000 to 59999 ...
+info: Adding new group `user3' (1003) ...
+info: Adding new user `user3' (1003) with group `user3 (1003)' ...
+info: Creating home directory `/home/user3' ...
+info: Copying files from `/etc/skel' ...
+New password: 
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for user3
+Enter the new value, or press ENTER for the default
+        Full Name []: 
+        Room Number []: 
+        Work Phone []: 
+        Home Phone []: 
+        Other []: 
+
+
+Is the information correct? [Y/n] info: Adding new user `user3' to supplemental / extra groups `users' ...
+info: Adding user `user3' to group `users' ...
+root@eltex-practice2-v30:~# 
+
+root@eltex-practice2-v30:~# usermod -s /usr/sbin/nologin user3
+root@eltex-practice2-v30:~# su user3
+This account is currently not available.
+root@eltex-practice2-v30:~# su -s /bin/bash user3
+user3@eltex-practice2-v30:/root$ logout
+bash: logout: not login shell: use `exit'
+user3@eltex-practice2-v30:/root$ exit
+exit
+root@eltex-practice2-v30:~#
+
+root@eltex-practice2-v30:~# usermod -a -G additional user1
+root@eltex-practice2-v30:~# usermod -a -G additional user2
+root@eltex-practice2-v30:~# usermod -a -G additional user3
+
+
+t@eltex-practice2-v30:~# id user1; id user2; id user3
+uid=1001(user1) gid=1001(user1) groups=1001(user1),1004(additional)
+uid=1002(user2) gid=1002(user2) groups=1002(user2),100(users),1004(additional)
+uid=1003(user3) gid=1003(user3) groups=1003(user3),100(users),1004(additional)
+
+
+t@eltex-practice2-v30:~# mkdir /opt/share
+root@eltex-practice2-v30:~# chgrp additional /opt/share/
+root@eltex-practice2-v30:~# ls -ld /opt/share/
+drwxr-xr-x 2 root additional 4096 Jul 13 04:45 /opt/share/
+root@eltex-practice2-v30:~# chmod 2771 /opt/share/
+
+user1@eltex-practice2-v30:~$ touch /opt/share/file_user1
+user2@eltex-practice2-v30:~$ touch /opt/share/file_user2
+user3@eltex-practice2-v30:~$ touch /opt/share/file_user3
+
+user3@eltex-practice2-v30:~$ rm /opt/share/file_user2
+user2@eltex-practice2-v30:~$ rm /opt/share/file_user1
+user1@eltex-practice2-v30:~$ rm /opt/share/file_user3
+
+root@eltex-practice2-v30:~# chmod +t /opt/share/
+
+user3@eltex-practice2-v30:~$ rm /opt/share/file_user2
+rm: cannot remove '/opt/share/file_user2': Operation not permitted
+user2@eltex-practice2-v30:~$ rm /opt/share/file_user1
+rm: cannot remove '/opt/share/file_user1': Operation not permitted
+user1@eltex-practice2-v30:~$ rm /opt/share/file_user3 
+rm: cannot remove '/opt/share/file_user3': Operation not permitted
+
+root@eltex-practice2-v30:~$ visudo
+user1 ALL=(ALL:ALL) /usr/sbin/dmesg
+
+vi /usr/local/bin/mydmesg.sh
+#!/bin/bash
+dmesg
+
+root@eltex-practice2-v30:~# chmod 4755 /usr/local/bin/mydmesg.sh
+
+user2@eltex-practice2-v30:~$ bash /usr/local/bin/mydmesg.sh
+dmesg: read kernel buffer failed: Operation not permitted
+
+root@eltex-practice2-v30:~# chage -M 10 user1
+root@eltex-practice2-v30:~# chage -M 10 user2
+root@eltex-practice2-v30:~# chage -M 10 user3
+
+root@eltex-practice2-v30:~# vi /etc/motd
+Вячеслав Попов
+
+
+root@eltex-practice2-v30:~# rsync -a /etc/ /root/etc_backup/
+
+root@eltex-practice2-v30:~# tar -czf /etc_backup.tar.gz /etc_backup
+root@eltex-practice2-v30:~# tar -cjf /etc_backup.tar.bz2 /etc_backup
+root@eltex-practice2-v30:~# 7z a /etc_backup.7z /etc_backup
+
+root@eltex-practice2-v30:~# ls -lh etc_backup.*
+-rw-r--r-- 1 root root 4.5M Jul 14 10:21 etc_backup.7z
+-rw-r--r-- 1 root root 526K Jul 14 10:18 etc_backup.tar.bz2
+-rw-r--r-- 1 root root 1.4M Jul 14 07:49 etc_backup.tar.gz
+
+
+root@eltex-practice2-v30:~# rsync -a /etc/ /root/etc_backup/
+
+
+root@eltex-practice2-v30:~# tar -r -f etc_backup.tar /etc/motd
+
+root@eltex-practice2-v30:~# gzip etc_backup.tar
+
+root@eltex-practice2-v30:~# tar -djf /root/etc_backup.tar.bz2 -C /root/etc_backup
+
+root@eltex-practice2-v30:~# mkdir etc_backup_gzip                              root@eltex-practice2-v30:~# mkdir etc_backup_7zip
+
+o
+t@eltex-practice2-v30:~# tar -xzf /root/etc_backup.tar.gz -C /root/etc_backup_gzip
+root@eltex-practice2-v30:~# 7z x /root/etc_backup.7z -o/root/etc_backup_7zip
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:2 OPEN_MAX:1024
+
+Scanning the drive for archives:
+1 file, 4618089 bytes (4510 KiB)
+
+Extracting archive: /root/etc_backup.7z
+--
+Path = /root/etc_backup.7z
+Type = 7z
+Physical Size = 4618089
+Headers Size = 20486
+Method = LZMA2:24 BCJ
+Solid = +
+Blocks = 2
+
+Everything is Ok
+
+Folders: 244
+Files: 1460
+Size:       38596892
+Compressed: 4618089
+
+root@eltex-practice2-v30:~# diff /root/etc_backup_gzip/root/etc_backup/motd /root/etc_backup_7zip/etc_backup/motd
+root@eltex-practice2-v30:~#
+
+
