@@ -1,0 +1,33 @@
+#ifndef PHONEBOOK_H
+#define PHONEBOOK_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define MAX_CONTACTS 100
+#define NAME_LEN 20
+#define SURNAME_LEN 20
+#define PHONE_LEN 13
+
+//Фамилия, имя, отчество, номер телефона, id 
+
+typedef struct
+{
+    int id;
+    char name[NAME_LEN];
+    char surname[SURNAME_LEN];
+    char phone[PHONE_LEN];
+    int used;
+} Phonebook;
+
+int generateId(Phonebook contacts[]);
+int idExists(Phonebook contacts[], int id);
+
+void addContact(Phonebook contacts[]);
+void editContact(Phonebook contacts[]);
+void deleteContact(Phonebook contacts[]);
+void printContacts(Phonebook contacts[]);
+
+void loadContacts(Phonebook contacts[]);
+void saveContacts(Phonebook contacts[]);
+#endif
