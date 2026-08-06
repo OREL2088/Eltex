@@ -36,6 +36,7 @@ void editContact(Phonebook contacts[]);
 void deleteContact(Phonebook contacts[]);
 void printContacts(Phonebook contacts[]);
 
+void searchMenu(Phonebook contacts[]);
 void searchContacts(Phonebook contacts[], int count, ...);
 
 void loadContacts(Phonebook contacts[]);

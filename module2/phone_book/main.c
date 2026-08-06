@@ -12,10 +12,11 @@ int main ()
         printf("============МЕНЮ============\n"
             "\n"
             "1. Вывести список контактов;\n"
-            "2. Добавить контакт;\n"
-            "3. Редактировать контакт;\n"
-            "4. Удалить контакт;\n"
-            "5. Выход.\n\n"
+            "2. Поиск контакта;\n"
+            "3. Добавить контакт;\n"
+            "4. Редактировать контакт;\n"
+            "5. Удалить контакт;\n"
+            "6. Выход.\n\n"
             "Выберите действие: ");
         scanf ("%d", &choice);
         printf("\n");
@@ -26,25 +27,28 @@ int main ()
                 printContacts(contacts);
                 break;
             case 2:
+                searchMenu(contacts);
+                break;
+            case 3:
                 addContact(contacts);
                 saveContacts(contacts);
                 break;
-            case 3:
+            case 4:
                 editContact(contacts);
                 saveContacts(contacts);
                 break;
-            case 4:
+            case 5:
                 deleteContact(contacts);
                 saveContacts(contacts);
                 break;
-            case 5:
+            case 6:
                 printf("До свидания!\n");
                 break;
             default:
                 printf("Неверный пункт меню!\n");
         }
 
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
