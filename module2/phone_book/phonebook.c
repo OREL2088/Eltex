@@ -136,10 +136,11 @@ void loadContacts(Phonebook contacts[])
 
     int i = 0;
 
-    while (fscanf(file, "%29[^;];%29[^;];%19[^\n]\n",
+    while (fscanf(file, "%d;%29[^;];%29[^;];%19[^\n]\n",
+                  &contacts[i].id,
                   contacts[i].name,
                   contacts[i].surname,
-                  contacts[i].phone) == 3)
+                  contacts[i].phone) == 4)
     {
         contacts[i].used = 1;
         i++;
