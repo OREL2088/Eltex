@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "phonebook.h"
 
 int generateId(Phonebook contacts[])
@@ -125,6 +124,57 @@ void printContacts(Phonebook contacts[])
     {
         printf("Контактов нет!\n");
     }
+}
+
+void searchContacts(Phonebook contacts[], int count, ...)
+{
+    SearchField fields[3];
+    const char *values[3];
+
+    va_list args;
+    va_start(args, count);
+
+    for (int i = 0; i < count; i++)
+    {
+        fields[i] = va_arg(args, SearchField);
+        values[i] = va_arg(args, const char *);
+    }
+
+    va_end(args);
+
+    int found = 0;
+
+    for (int i = 0; i < MAX_CONTACTS; i++)
+    {
+        if (!contacts[i].used)
+            continue;
+        
+        int match = 1;
+
+        for (int j = 0; j < count; j ++)
+        {
+            switch (fields[j])
+            {
+                case SEARCH_NAME:
+                    if (strcmp(contacts[i].name, values[j]) != 0)
+                        match = 0;
+                    break;
+
+                case SEARCH_SURNAME:
+                    if (strcmp(contacts[i].surname, values[j]) != 0)
+                        match = 0;
+                    break;
+
+                case SEARCH_PHONE:
+                    if (strcmp(contacts[i].phone, values[j]) != 0)
+                        match = 0;
+                    break;
+            }
+        }
+
+    }
+
+
 }
 
 void loadContacts(Phonebook contacts[])

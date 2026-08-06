@@ -2,6 +2,8 @@
 #define PHONEBOOK_H
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdarg.h>
 #include <time.h>
 
 #define MAX_CONTACTS 100
@@ -20,6 +22,12 @@ typedef struct
     int used;
 } Phonebook;
 
+typedef enum{
+    SEARCH_NAME = 1,
+    SEARCH_SURNAME,
+    SEARCH_PHONE
+} SearchField;
+
 int generateId(Phonebook contacts[]);
 int idExists(Phonebook contacts[], int id);
 
@@ -27,6 +35,8 @@ void addContact(Phonebook contacts[]);
 void editContact(Phonebook contacts[]);
 void deleteContact(Phonebook contacts[]);
 void printContacts(Phonebook contacts[]);
+
+void searchContacts(Phonebook contacts[], int count, ...);
 
 void loadContacts(Phonebook contacts[]);
 void saveContacts(Phonebook contacts[]);
