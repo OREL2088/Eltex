@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include <time.h>
+#include <CUnit/Basic.h>
 
 #define MAX_CONTACTS 100
 #define NAME_LEN 20
