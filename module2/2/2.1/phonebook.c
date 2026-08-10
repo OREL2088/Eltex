@@ -126,7 +126,7 @@ void printContacts(Phonebook contacts[])
     }
 }
 
-void searchContacts(Phonebook contacts[], int count, ...)
+int searchContacts(Phonebook contacts[], Phonebook result[], int count, ...)
 {
     SearchField fields[3];
     const char *values[3];
@@ -148,10 +148,10 @@ void searchContacts(Phonebook contacts[], int count, ...)
     {
         if (!contacts[i].used)
             continue;
-        
+
         int match = 1;
 
-        for (int j = 0; j < count; j ++)
+        for (int j = 0; j < count; j++)
         {
             switch (fields[j])
             {
@@ -177,17 +177,12 @@ void searchContacts(Phonebook contacts[], int count, ...)
 
         if (match)
         {
-            printf("%d | %s %s | %s\n",
-                    contacts[i].id,
-                    contacts[i].name,
-                    contacts[i].surname,
-                    contacts[i].phone);
-            found = 1;
+            result[found] = contacts[i];
+            found++;
         }
     }
 
-    if (!found)
-        printf("Контакты не найдены.\n");
+    return found;
 }
 
 void searchMenu(Phonebook contacts[])
@@ -231,32 +226,56 @@ void searchMenu(Phonebook contacts[])
         scanf("%19s", values[i]);
     }
 
+    Phonebook result[MAX_CONTACTS];
+
+    int found;
+
     if (count == 1)
     {
-        searchContacts(
+        found = searchContacts(
             contacts,
+            result,
             1,
             fields[0], values[0]
         );
     }
     else if (count == 2)
     {
-        searchContacts(
+        found = searchContacts(
             contacts,
+            result,
             2,
             fields[0], values[0],
             fields[1], values[1]
         );
     }
-    else if (count == 3)
+    else
     {
-        searchContacts(
+        found = searchContacts(
             contacts,
+            result,
             3,
             fields[0], values[0],
             fields[1], values[1],
             fields[2], values[2]
         );
+    }
+
+    if (found == 0)
+    {
+        printf("Контакты не найдены.\n");
+        return;
+    }
+
+    printf("\nНайденные контакты:\n");
+
+    for (int i = 0; i < found; i++)
+    {
+        printf("%d | %s %s | %s\n",
+               result[i].id,
+               result[i].name,
+               result[i].surname,
+               result[i].phone);
     }
 }
 
