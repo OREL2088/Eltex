@@ -3,6 +3,9 @@ obj-m += blink_leds.o
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 
+ls:
+	ls /sys/kernel/systest/test
+
 go:
 	@sudo insmod blink_leds.ko
 	@sudo dmesg | grep "blink_leds"
