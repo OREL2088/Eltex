@@ -1,0 +1,169 @@
+#include "test_phonebook.h"
+
+#include "../storage.h"
+
+#include <stdio.h>
+
+static Contact makeContact(int id, const char *name, const char *surname,
+                           const char *phone)
+{
+    Contact contact = {0};
+
+    contact.id = id;
+    snprintf(contact.name, sizeof(contact.name), "%s", name);
+    snprintf(contact.surname, sizeof(contact.surname), "%s", surname);
+    snprintf(contact.phone, sizeof(contact.phone), "%s", phone);
+    return contact;
+}
+
+void testInitAndStatuses(void)
+{
+    Phonebook phonebook;
+
+    CU_ASSERT_EQUAL(phonebookInit(&phonebook), PHONEBOOK_OK);
+    CU_ASSERT_PTR_NULL(phonebook.root);
+    CU_ASSERT_EQUAL(phonebook.size, 0);
+    CU_ASSERT_EQUAL(phonebook.changes_since_balance, 0);
+    CU_ASSERT_EQUAL(phonebookClear(&phonebook), PHONEBOOK_OK);
+}
+
+void testInsertFindAndDuplicate(void)
+{
+    Phonebook phonebook;
+    Contact contact = makeContact(1001, "Иван", "Иванов", "111");
+    const Contact *found = NULL;
+
+    phonebookInit(&phonebook);
+    CU_ASSERT_EQUAL(phonebookInsert(&phonebook, &contact), PHONEBOOK_OK);
+    CU_ASSERT_EQUAL(phonebookInsert(&phonebook, &contact),
+                    PHONEBOOK_DUPLICATE_ID);
+    CU_ASSERT_EQUAL(phonebookFindById(&phonebook, 1001, &found), PHONEBOOK_OK);
+    CU_ASSERT_PTR_NOT_NULL(found);
+    if (found != NULL)
+        CU_ASSERT_STRING_EQUAL(found->surname, "Иванов");
+    CU_ASSERT_EQUAL(phonebookFindById(&phonebook, 9999, &found),
+                    PHONEBOOK_NOT_FOUND);
+    phonebookClear(&phonebook);
+}
+
+void testAutomaticBalance(void)
+{
+    Phonebook phonebook;
+    int index;
+
+    phonebookInit(&phonebook);
+    for (index = 0; index < (int)PHONEBOOK_BALANCE_INTERVAL; index++) {
+        Contact contact;
+        char name[NAME_LEN];
+
+        snprintf(name, sizeof(name), "Name%02d", index);
+        contact = makeContact(1000 + index, name, "Same", "123");
+        CU_ASSERT_EQUAL(phonebookInsert(&phonebook, &contact), PHONEBOOK_OK);
+    }
+    CU_ASSERT_EQUAL(phonebook.size, PHONEBOOK_BALANCE_INTERVAL);
+    CU_ASSERT_EQUAL(phonebook.changes_since_balance, 0);
+    CU_ASSERT(phonebookHeight(&phonebook) <= 4);
+    phonebookClear(&phonebook);
+}
+
+void testUpdateReordersTree(void)
+{
+    Phonebook phonebook;
+    Contact first = makeContact(1001, "Иван", "Иванов", "111");
+    Contact second = makeContact(1002, "Пётр", "Петров", "222");
+    const Contact *found = NULL;
+
+    phonebookInit(&phonebook);
+    phonebookInsert(&phonebook, &first);
+    phonebookInsert(&phonebook, &second);
+    CU_ASSERT_EQUAL(phonebookUpdate(&phonebook, 1002, "Пётр", "Алексеев",
+                                    "999"), PHONEBOOK_OK);
+    CU_ASSERT_EQUAL(phonebookFindById(&phonebook, 1002, &found), PHONEBOOK_OK);
+    CU_ASSERT_PTR_NOT_NULL(found);
+    if (found != NULL) {
+        CU_ASSERT_STRING_EQUAL(found->surname, "Алексеев");
+        CU_ASSERT_STRING_EQUAL(found->phone, "999");
+    }
+    CU_ASSERT_EQUAL(phonebook.root->contact.id, 1001);
+    CU_ASSERT_EQUAL(phonebook.root->left->contact.id, 1002);
+    phonebookClear(&phonebook);
+}
+
+void testRemoveContact(void)
+{
+    Phonebook phonebook;
+    Contact first = makeContact(1001, "Иван", "Иванов", "111");
+    Contact second = makeContact(1002, "Пётр", "Петров", "222");
+
+    phonebookInit(&phonebook);
+    phonebookInsert(&phonebook, &first);
+    phonebookInsert(&phonebook, &second);
+    CU_ASSERT_EQUAL(phonebookRemove(&phonebook, 1001), PHONEBOOK_OK);
+    CU_ASSERT_EQUAL(phonebook.size, 1);
+    CU_ASSERT_EQUAL(phonebookRemove(&phonebook, 1001), PHONEBOOK_NOT_FOUND);
+    CU_ASSERT_EQUAL(phonebook.root->contact.id, 1002);
+    phonebookClear(&phonebook);
+}
+
+void testSearchByTwoFields(void)
+{
+    Phonebook phonebook;
+    Contact first = makeContact(1001, "Иван", "Иванов", "111");
+    Contact second = makeContact(1002, "Пётр", "Иванов", "222");
+    Contact result[2];
+    SearchCriterion criteria[] = {
+        {SEARCH_SURNAME, "Иванов"},
+        {SEARCH_PHONE, "222"}
+    };
+    size_t found = 0;
+
+    phonebookInit(&phonebook);
+    phonebookInsert(&phonebook, &first);
+    phonebookInsert(&phonebook, &second);
+    CU_ASSERT_EQUAL(phonebookSearch(&phonebook, criteria, 2, result, 2,
+                                    &found), PHONEBOOK_OK);
+    CU_ASSERT_EQUAL(found, 1);
+    CU_ASSERT_EQUAL(result[0].id, 1002);
+    phonebookClear(&phonebook);
+}
+
+void testInvalidArguments(void)
+{
+    Phonebook phonebook;
+    Contact invalid = makeContact(1001, "", "Иванов", "111");
+    size_t found;
+
+    phonebookInit(&phonebook);
+    CU_ASSERT_EQUAL(phonebookInsert(&phonebook, &invalid),
+                    PHONEBOOK_INVALID_ARGUMENT);
+    CU_ASSERT_EQUAL(phonebookSearch(&phonebook, NULL, 0, NULL, 0, &found),
+                    PHONEBOOK_INVALID_ARGUMENT);
+    CU_ASSERT_EQUAL(phonebookRemove(NULL, 1001), PHONEBOOK_INVALID_ARGUMENT);
+    phonebookClear(&phonebook);
+}
+
+void testStorageRoundTrip(void)
+{
+    const char *filename = "/tmp/eltex_phonebook_4_3_test.txt";
+    Phonebook source;
+    Phonebook loaded;
+    Contact first = makeContact(1001, "Ivan", "Ivanov", "111");
+    Contact second = makeContact(1002, "Petr", "Petrov", "222");
+    const Contact *found = NULL;
+    size_t loaded_count = 0;
+
+    phonebookInit(&source);
+    phonebookInit(&loaded);
+    phonebookInsert(&source, &first);
+    phonebookInsert(&source, &second);
+    CU_ASSERT_EQUAL(storageSave(&source, filename), PHONEBOOK_OK);
+    CU_ASSERT_EQUAL(storageLoad(&loaded, filename, &loaded_count), PHONEBOOK_OK);
+    CU_ASSERT_EQUAL(loaded_count, 2);
+    CU_ASSERT_EQUAL(phonebookFindById(&loaded, 1002, &found), PHONEBOOK_OK);
+    CU_ASSERT_PTR_NOT_NULL(found);
+    if (found != NULL)
+        CU_ASSERT_STRING_EQUAL(found->surname, "Petrov");
+    remove(filename);
+    phonebookClear(&source);
+    phonebookClear(&loaded);
+}

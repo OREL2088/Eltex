@@ -177,7 +177,6 @@ int updateContact(Phonebook *phonebook, int id, const char *name,
     snprintf(node->data.surname, sizeof(node->data.surname), "%s", surname);
     snprintf(node->data.phone, sizeof(node->data.phone), "%s", phone);
 
-    /* Поля сортировки могли измениться, поэтому узел вставляется заново. */
     unlinkNode(phonebook, node);
     insertNodeSorted(phonebook, node);
     return 1;
